@@ -13,7 +13,7 @@ brew install libusb libusb-compat
 
 ## Install
 ```bash
-$ go get github.com/hink/go-blink1
+$ go get github.com/commondatageek/go-blink1
 ```
 
 
@@ -112,7 +112,7 @@ LED helper constants, used to target specific LED's on the sides of Blink(1).
 ```go
 package main
 
-import "github.com/hink/go-blink1"
+import "github.com/commondatageek/go-blink1"
 
 func main() {
 
