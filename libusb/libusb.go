@@ -2,10 +2,11 @@ package libusb
 
 /*
 #cgo CFLAGS: -I/opt/homebrew/Cellar/libusb-compat/0.1.8/include -I/opt/homebrew/Cellar/libusb/1.0.27/include
-#cgo LDFLAGS: /opt/homebrew/Cellar/libusb-compat/0.1.8/lib/libusb.a /opt/homebrew/Cellar/libusb/1.0.27/lib/libusb-1.0.a -framework CoreFoundation -framework IOKit
+#cgo LDFLAGS: /opt/homebrew/Cellar/libusb-compat/0.1.8/lib/libusb.a /opt/homebrew/Cellar/libusb/1.0.27/lib/libusb-1.0.a -framework CoreFoundation -framework IOKit -framework Security
 #include <usb.h>
 */
 import "C"
+
 import (
 	"fmt"
 	"unsafe"
