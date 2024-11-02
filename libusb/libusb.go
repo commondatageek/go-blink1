@@ -1,13 +1,15 @@
 package libusb
 
 /*
-	#cgo LDFLAGS: -lusb
-	#include <usb.h>
+#cgo CFLAGS: -I/opt/homebrew/Cellar/libusb-compat/0.1.8/include -I/opt/homebrew/Cellar/libusb/1.0.27/include
+#cgo LDFLAGS: /opt/homebrew/Cellar/libusb-compat/0.1.8/lib/libusb.a /opt/homebrew/Cellar/libusb/1.0.27/lib/libusb-1.0.a -framework CoreFoundation -framework IOKit
+#include <usb.h>
 */
 import "C"
-import "unsafe"
-
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 func Init() (int, int) {
 	C.usb_init()
@@ -66,27 +68,29 @@ type Device struct {
 	timeout    int
 }
 
-/// open usb device with info
-//func Open(info Info) (*Device)
-//{
-//    var rdev *Device = nil;
+// / open usb device with info
+// func Open(info Info) (*Device)
 //
-//    for bus := C.usb_get_busses() ; bus != nil ; bus=bus.next
-//    {
-//        for dev := bus.devices ; dev!=nil ; dev = dev.next
-//        {
-//            if int(dev.descriptor.idVendor)  == info.Vid &&
-//               int(dev.descriptor.idProduct) == info.Pid
-//            {
-//                h := C.usb_open(dev);
-//                rdev = &Device{&info,h,dev.descriptor,10000};
-//                return rdev;
-//            }
-//        }
-//    }
-//    return rdev;
-//}
-/// open usb device with info
+//	{
+//	   var rdev *Device = nil;
+//
+//	   for bus := C.usb_get_busses() ; bus != nil ; bus=bus.next
+//	   {
+//	       for dev := bus.devices ; dev!=nil ; dev = dev.next
+//	       {
+//	           if int(dev.descriptor.idVendor)  == info.Vid &&
+//	              int(dev.descriptor.idProduct) == info.Pid
+//	           {
+//	               h := C.usb_open(dev);
+//	               rdev = &Device{&info,h,dev.descriptor,10000};
+//	               return rdev;
+//	           }
+//	       }
+//	   }
+//	   return rdev;
+//	}
+//
+// / open usb device with info
 func Open(vid, pid int, device string) *Device {
 	for bus := C.usb_get_busses(); bus != nil; bus = bus.next {
 		for dev := bus.devices; dev != nil; dev = dev.next {
